@@ -1,2 +1,7 @@
 transformers
 torch
+torchvision
+torchaudio
+rouge-score
+nltk
+bert-score

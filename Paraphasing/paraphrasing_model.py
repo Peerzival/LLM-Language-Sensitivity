@@ -1,15 +1,14 @@
 import json
 import os
+import torch
+import json
+import uuid
 
 from transformers import pipeline
-
-# Get the current directory
-current_directory = os.getcwd()
-
-relative_path = "Eval_LLM/Common-sense/Social_IQa/Social_IQa.json"
-
-# Join the current directory with the relative path to get the absolute path
-json_path = os.path.join(current_directory, relative_path)
+from rouge_score import rouge_scorer
+from nltk.translate.bleu_score import sentence_bleu
+from nltk.translate.bleu_score import SmoothingFunction
+from bert_score import score
 
 
 class QualityControlPipeline:
@@ -44,14 +43,3 @@ class QualityControlPipeline:
             else [" ".join(control) for t in text]
         )
         return self.pipe(text, **kwargs)
-
-
-model = QualityControlPipeline("sentences")
-sentence = """Which statement best explains why photosynthesis is the foundation of most food webs?"""
-
-with open(json_path, "r") as file:
-    data = json.load(file)
-
-first_input = data["examples"][0]["input"]
-
-print(model(first_input, lexical=0.3, syntactic=0.5, semantic=0.8))

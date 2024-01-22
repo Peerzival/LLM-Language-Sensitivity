@@ -1,0 +1,17 @@
+{
+  "low": {
+    "lexical": 0.3,
+    "syntactic": 0.3,
+    "semantic": 1
+  },
+  "medium": {
+    "lexical": 0.5,
+    "syntactic": 0.5,
+    "semantic": 1
+  },
+  "high": {
+    "lexical": 0.8,
+    "syntactic": 0.8,
+    "semantic": 1
+  }
+}
