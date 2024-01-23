@@ -42,4 +42,4 @@ class QualityControlPipeline:
             if isinstance(text, str)
             else [" ".join(control) for t in text]
         )
-        return self.pipe(text, **kwargs)
+        return self.pipe(text, max_new_tokens=300, **kwargs)

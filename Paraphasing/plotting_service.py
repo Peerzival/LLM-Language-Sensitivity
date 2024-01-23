@@ -11,20 +11,20 @@ with open(result_set_file_path) as f:
 
 id = data['SocialIQa']['ROUGE'][0]['id']
 
-def get_rouge1_scores() -> dict:
-  rouge1_scores = {
+def get_rougeL_scores() -> dict:
+  rougeL_scores = {
     "low": "",
     "medium": "",
     "high": ""
   }
   for item in data['SocialIQa']['ROUGE']:
     if item['id'] == id and item['model_parameter_group'] == "low":
-      rouge1_scores['low'] = float(item['metric']['rouge1']['f1'])
+      rougeL_scores['low'] = float(item['metric']['rougeL']['f1'])
     elif item['id'] == id and item['model_parameter_group'] == "medium":
-      rouge1_scores['medium'] = float(item['metric']['rouge1']['f1'])
+      rougeL_scores['medium'] = float(item['metric']['rougeL']['f1'])
     elif item['id'] == id and item['model_parameter_group'] == "high":
-      rouge1_scores['high'] = float(item['metric']['rouge1']['f1'])
-  return rouge1_scores
+      rougeL_scores['high'] = float(item['metric']['rougeL']['f1'])
+  return rougeL_scores
 
 def get_bleu_scores() -> dict:
   bleu_scores = {
@@ -57,11 +57,11 @@ def get_bert_score() -> dict:
   return bert_scores
 
 
-# Plot the scores for the selected item
+# Plot the scores
 plt.figure(figsize=(10, 6))
 plt.subplot(131)
-plt.bar(['low', 'medium', 'high'], list(get_rouge1_scores().values()))
-plt.title('ROUGE F1')
+plt.bar(['low', 'medium', 'high'], list(get_rougeL_scores().values()))
+plt.title('ROUGE-L F1')
 plt.subplot(132)
 plt.bar(['low', 'medium', 'high'], list(get_bleu_scores().values()))
 plt.title('BLEU')

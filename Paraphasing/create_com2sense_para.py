@@ -15,10 +15,10 @@ from paraphrasing_model import QualityControlPipeline
 
 basedir = Path(__file__).parents[1]
 data_set_file_path = os.path.join(
-    basedir, "dataset/Common-sense/Social_IQa/Social_IQa.json"
+    basedir, "dataset/Emotianal_Understanding/COM2SENSE/COM2SENSE.json"
 )
 result_set_file_path = os.path.join(
-    os.path.dirname(__file__), "social_iq_score_set.json"
+    os.path.dirname(__file__), "para_sets/com2sense_score_set.json"
 )
 parameter_groups_file_path = os.path.join(
     os.path.dirname(__file__), "parameter_groups.json"
@@ -53,7 +53,7 @@ model = QualityControlPipeline("sentences")
 chencherry = SmoothingFunction()
 
 # Create the JSON structure
-data = {"SocialIQa": {"ROUGE": [], "BLEU": [], "BERTScore": []}}
+data = {"COM2SENSE": {"ROUGE": [], "BLEU": [], "BERTScore": []}}
 
 with open(
     data_set_file_path,
@@ -65,11 +65,10 @@ with open(parameter_groups_file_path, "r") as file:
     parameter_set = json.load(file)
 
 for reference in dataset["examples"]:
-    id = str(uuid.uuid4())
     for parameter in parameter_set:
-        print(f'Processing reference: {reference["input"]}')
+        print(f'Processing reference: {reference["sent"]}')
         candidate = model(
-            reference["input"],
+            reference["sent"],
             parameter_set[parameter]["lexical"],
             parameter_set[parameter]["syntactic"],
             parameter_set[parameter]["semantic"],
@@ -79,8 +78,8 @@ for reference in dataset["examples"]:
         for metric in ["ROUGE", "BLEU", "BERTScore"]:
             print(f"Processing metric: {metric}")
             item = {
-                "id": id,
-                "reference_text": reference["input"],
+                "id": reference["id"],
+                "reference_text": reference["sent"],
                 "candidate_text": candidate,
                 "model_parameter_group": parameter,
                 "metric": {},
@@ -89,51 +88,51 @@ for reference in dataset["examples"]:
                 item["metric"] = {
                     "rouge1": {
                         "f1": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge1"
                             ].fmeasure
                         ),
                         "p": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge1"
                             ].precision
                         ),
                         "r": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge1"
                             ].recall
                         ),
                     },
                     "rouge2": {
                         "f1": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge2"
                             ].fmeasure
                         ),
                         "p": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge2"
                             ].precision
                         ),
                         "r": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rouge2"
                             ].recall
                         ),
                     },
                     "rougeL": {
                         "f1": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rougeL"
                             ].fmeasure
                         ),
                         "p": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rougeL"
                             ].precision
                         ),
                         "r": str(
-                            get_rouge_scores(reference["input"], candidate)[
+                            get_rouge_scores(reference["sent"], candidate)[
                                 "rougeL"
                             ].recall
                         ),
@@ -143,20 +142,20 @@ for reference in dataset["examples"]:
                 item["metric"] = {
                     "bleu": {
                         "score": get_bleu_score(
-                            reference["input"], candidate, chencherry
+                            reference["sent"], candidate, chencherry
                         )
                     }
                 }
             elif metric == "BERTScore":
                 item["metric"] = {
                     "bertscore": {
-                        "f1": get_bert_score(reference["input"], candidate)["f1"],
-                        "p": get_bert_score(reference["input"], candidate)["precision"],
-                        "r": get_bert_score(reference["input"], candidate)["recall"],
+                        "f1": get_bert_score(reference["sent"], candidate)["f1"],
+                        "p": get_bert_score(reference["sent"], candidate)["precision"],
+                        "r": get_bert_score(reference["sent"], candidate)["recall"],
                     }
                 }
             print(f'Appending item to data["SocialIQa"]{metric}')
-            data["SocialIQa"][metric].append(item)
+            data["COM2SENSE"][metric].append(item)
 
 
 # Write the filled JSON structure to the file
