@@ -3,25 +3,24 @@
 #SBATCH --output=job-%J.out
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=maxmartin.gnewuch@stud.uni-goettingen.de
-#SBATCH -ntasks = 1
-#SBATCH -p gpu
-#SBATCH --mem-per-gpu=20G
+#SBATCH --ntasks=1
+#SBATCH -N 1
+#SBATCH -p medium
+#SBATCH --mem-per-cpu=4G
 #SBATCH --time=03:00:00
 #SBATCH -C scratch
 
 module load python
 
+echo "Current directory is: $(pwd)"
 if [ -d "/scratch/users/gnewuch/llm_evaluation_project/llm_paraphrase" ]; then
-    source /scratch/users/gnewuch/env/bin/activate
-    python3 ~/llm_paraphrase/test_full_CoQa/task.py
+    cd /scratch/users/gnewuch/llm_evaluation_project/llm_paraphrase
+    source env/bin/activate
+    echo "Current directory is: $(pwd)"
+    python3 test_full_CoQa/task.py
 else
     mkdir -p /scratch/users/gnewuch/llm_evaluation_project
     cp -r ~/llm_paraphrase /scratch/users/gnewuch/llm_evaluation_project
     cd /scratch/users/gnewuch/llm_evaluation_project/llm_paraphrase
-
     python -m venv /scratch/users/gnewuch/env
     source /scratch/users/gnewuch/env/bin/activate
-    pip install -r requirements.txt
-    pip install git+https://github.com/google/BIG-bench.git
-    python3 ~/llm_paraphrase/test_full_CoQa/task.py
-fi
