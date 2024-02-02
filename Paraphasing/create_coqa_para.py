@@ -15,7 +15,7 @@ from paraphrasing_model import QualityControlPipeline
 
 basedir = Path(__file__).parents[1]
 data_set_file_path = os.path.join(
-    basedir, "dataset/CoQA/CoQA_short.json"
+    basedir, "dataset/CoQA/Full_set/coqa.test.json"
 )
 result_set_file_path = os.path.join(
     os.path.dirname(__file__), "para_sets/coqa_score_set.json"

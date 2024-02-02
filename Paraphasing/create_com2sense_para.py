@@ -15,7 +15,7 @@ from paraphrasing_model import QualityControlPipeline
 
 basedir = Path(__file__).parents[1]
 data_set_file_path = os.path.join(
-    basedir, "dataset/Emotianal_Understanding/COM2SENSE/COM2SENSE.json"
+    basedir, "dataset/Emotianal_Understanding/COM2SENSE/Full_set/Com2sense.json"
 )
 result_set_file_path = os.path.join(
     os.path.dirname(__file__), "para_sets/com2sense_score_set.json"
