@@ -15,8 +15,7 @@ from paraphrasing_model import QualityControlPipeline
 
 basedir = Path(__file__).parents[1]
 data_set_file_path = os.path.join(
-    basedir, "dataset/CoQA/Full_set/coqa.test.json"
-)
+    basedir, "Dataset/CoQA/Full_set/coqa.test.json")
 result_set_file_path = os.path.join(
     os.path.dirname(__file__), "para_sets/coqa_score_set.json"
 )
@@ -26,7 +25,8 @@ parameter_groups_file_path = os.path.join(
 
 
 def get_rouge_scores(reference: str, candidate: str) -> dict:
-    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
+    scorer = rouge_scorer.RougeScorer(
+        ["rouge1", "rouge2", "rougeL"], use_stemmer=True)
     return scorer.score(reference, candidate)
 
 
@@ -35,10 +35,8 @@ def get_bleu_score(
 ) -> str:
     reference = reference.split()
     candidate = candidate.split()
-    return str(
-        sentence_bleu(
-            [reference], candidate, smoothing_function=smoothingFunction.method1
-        )
+    return sentence_bleu(
+        [reference], candidate, smoothing_function=smoothingFunction.method1
     )
 
 
@@ -66,7 +64,6 @@ with open(parameter_groups_file_path, "r") as file:
 
 for reference in dataset["data"]:
     for parameter in parameter_set:
-        print(f'Processing reference: {reference["story"]}')
         candidate = model(
             reference["story"],
             parameter_set[parameter]["lexical"],
@@ -76,7 +73,6 @@ for reference in dataset["data"]:
         candidate = candidate[0]["generated_text"]
         # Fill the JSON structure
         for metric in ["ROUGE", "BLEU", "BERTScore"]:
-            print(f"Processing metric: {metric}")
             item = {
                 "id": reference["id"],
                 "reference_text": reference["story"],
@@ -85,57 +81,22 @@ for reference in dataset["data"]:
                 "metric": {},
             }
             if metric == "ROUGE":
+                rouge_scores = get_rouge_scores(reference["story"], candidate)
                 item["metric"] = {
                     "rouge1": {
-                        "f1": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge1"
-                            ].fmeasure
-                        ),
-                        "p": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge1"
-                            ].precision
-                        ),
-                        "r": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge1"
-                            ].recall
-                        ),
+                        "f1": rouge_scores["rouge1"].fmeasure,
+                        "p": rouge_scores["rouge1"].precision,
+                        "r": rouge_scores["rouge1"].recall,
                     },
                     "rouge2": {
-                        "f1": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge2"
-                            ].fmeasure
-                        ),
-                        "p": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge2"
-                            ].precision
-                        ),
-                        "r": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rouge2"
-                            ].recall
-                        ),
+                        "f1": rouge_scores["rouge2"].fmeasure,
+                        "p": rouge_scores["rouge2"].precision,
+                        "r": rouge_scores["rouge2"].recall,
                     },
                     "rougeL": {
-                        "f1": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rougeL"
-                            ].fmeasure
-                        ),
-                        "p": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rougeL"
-                            ].precision
-                        ),
-                        "r": str(
-                            get_rouge_scores(reference["story"], candidate)[
-                                "rougeL"
-                            ].recall
-                        ),
+                        "f1": rouge_scores["rougeL"].fmeasure,
+                        "p": rouge_scores["rougeL"].precision,
+                        "r": rouge_scores["rougeL"].recall,
                     },
                 }
             elif metric == "BLEU":
@@ -147,18 +108,17 @@ for reference in dataset["data"]:
                     }
                 }
             elif metric == "BERTScore":
+                bert_scores = get_bert_score(reference["story"], candidate)
                 item["metric"] = {
                     "bertscore": {
-                        "f1": get_bert_score(reference["story"], candidate)["f1"],
-                        "p": get_bert_score(reference["story"], candidate)["precision"],
-                        "r": get_bert_score(reference["story"], candidate)["recall"],
+                        "f1": bert_scores["f1"],
+                        "p": bert_scores["precision"],
+                        "r": bert_scores["recall"],
                     }
                 }
-            print(f'Appending item to data["SocialIQa"]{metric}')
             data["CoQA"][metric].append(item)
 
 
 # Write the filled JSON structure to the file
 with open(result_set_file_path, "w") as file:
     json.dump(data, file, indent=4)
-    print("Done!")

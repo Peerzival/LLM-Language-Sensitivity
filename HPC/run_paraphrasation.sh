@@ -4,20 +4,30 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=maxmartin.gnewuch@stud.uni-goettingen.de
 #SBATCH -p medium
-#SBATCH -N 1
-#SBATCH -c 20
-#SBATCH --mem-per-cpu=4G
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=16G
 #SBATCH -C scratch
-#SBATCH --time=05:00:00
+#SBATCH --time=20:00:00
 
 module load python
 
-echo "Current directory is: $(pwd)"
-if [ -d "/scratch/users/gnewuch/project" ]; then
+if [ -d "/scratch/users/gnewuch/project/LLM-Language-Sensitivity" ]; then
+  cd /scratch/users/gnewuch/project/LLM-Language-Sensitivity
+  source env/bin/activate
+  cd Paraphasing
+  python3 create_social_iqa_para.py
+  cd /scratch/users/gnewuch/project/LLM-Language-Sensitivity
+  deactivate
+else
   cp -r ~/LLM-Language-Sensitivity /scratch/users/gnewuch/project
   cd /scratch/users/gnewuch/project/LLM-Language-Sensitivity
   python -m venv env
   source env/bin/activate
   pip install -r requirements.txt
-python3 create_social_iqa_para.py
-deactivate
+  cd Paraphasing
+  python3 create_social_iqa_para.py && python3 create_coqa_para.py && python3 create_com2sense_para.py
+  cp -r /scratch/users/gnewuch/project/LLM-Language-Sensitivity/Paraphasing/para_sets ${HOME}/datasets
+  cd /scratch/users/gnewuch/project/LLM-Language-Sensitivity
+  deactivate
+fi
