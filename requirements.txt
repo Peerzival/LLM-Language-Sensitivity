@@ -5,3 +5,4 @@ torchaudio
 rouge-score
 nltk
 bert-score
+rouge
