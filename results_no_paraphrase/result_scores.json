@@ -1,0 +1,212 @@
+{
+    "SocialIQa": {
+        "gpt2-large": [
+            {
+                "score_dict 0": {
+                    "expected_calibration_error": 0.33476841888421255,
+                    "calibration_multiple_choice_brier_score": 0.2972873412225429,
+                    "multiple_choice_grade": 0.3426356589147287,
+                    "normalized_aggregate_score": 1.344364012409238
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 0,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 1": {
+                    "expected_calibration_error": 0.33576636969560486,
+                    "calibration_multiple_choice_brier_score": 0.2975648121356247,
+                    "multiple_choice_grade": 0.3457364341085271,
+                    "normalized_aggregate_score": 1.8097207859356053
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 1,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 2": {
+                    "expected_calibration_error": 0.346616509357483,
+                    "calibration_multiple_choice_brier_score": 0.29978664826944845,
+                    "multiple_choice_grade": 0.3385012919896641,
+                    "normalized_aggregate_score": 0.7238883143740789
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 2,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 3": {
+                    "expected_calibration_error": 0.3647499300754284,
+                    "calibration_multiple_choice_brier_score": 0.30402702526819686,
+                    "multiple_choice_grade": 0.32661498708010334,
+                    "normalized_aggregate_score": -1.0599793174770196
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 3,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            }
+        ],
+        "gpt2-xl": [
+            {
+                "score_dict 0": {
+                    "calibration_multiple_choice_brier_score": 0.29357949368515224,
+                    "expected_calibration_error": 0.32783277159938795,
+                    "multiple_choice_grade": 0.34315245478036177,
+                    "normalized_aggregate_score": 1.421923474663634
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 0,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 1": {
+                    "calibration_multiple_choice_brier_score": 0.32333079313082846,
+                    "expected_calibration_error": 0.3978075144209467,
+                    "multiple_choice_grade": 0.34521963824289403,
+                    "normalized_aggregate_score": 1.7321613236812095
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 1,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 2": {
+                    "calibration_multiple_choice_brier_score": 0.33328924247108177,
+                    "expected_calibration_error": 0.4204607980881918,
+                    "multiple_choice_grade": 0.3462532299741602,
+                    "normalized_aggregate_score": 1.8872802481900015
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 2,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 3": {
+                    "calibration_multiple_choice_brier_score": 0.33623821958493616,
+                    "expected_calibration_error": 0.427672333623927,
+                    "multiple_choice_grade": 0.34935400516795867,
+                    "normalized_aggregate_score": 2.3526370217163772
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 3,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            }
+        ],
+        "openai-gpt": [
+            {
+                "score_dict 0": {
+                    "calibration_multiple_choice_brier_score": 0.3408962975233936,
+                    "expected_calibration_error": 0.4346170305373157,
+                    "multiple_choice_grade": 0.3235142118863049,
+                    "normalized_aggregate_score": -1.5253360910033869
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 0,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 1": {
+                    "calibration_multiple_choice_brier_score": 0.3353517125030095,
+                    "expected_calibration_error": 0.4263550543375094,
+                    "multiple_choice_grade": 0.3302325581395349,
+                    "normalized_aggregate_score": -0.5170630816962478
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 1,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 2": {
+                    "calibration_multiple_choice_brier_score": 0.3384706844870331,
+                    "expected_calibration_error": 0.4336054540559002,
+                    "multiple_choice_grade": 0.32868217054263565,
+                    "normalized_aggregate_score": -0.7497414684594357
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 2,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            },
+            {
+                "score_dict 3": {
+                    "calibration_multiple_choice_brier_score": 0.33876236143019056,
+                    "expected_calibration_error": 0.43284976968327016,
+                    "multiple_choice_grade": 0.33281653746770024,
+                    "normalized_aggregate_score": -0.12926577042427648
+                },
+                "preferred_score": "multiple_choice_grade",
+                "number_of_shots": 3,
+                "low_score": 0.3336778639104239,
+                "high_score": 1.0,
+                "subtask_description": "social_iqa"
+            }
+        ]
+    },
+    "CoQA": {
+        "gpt2-large": [],
+        "gpt2-xl": [],
+        "openai-gpt": []
+    },
+    "COM2SENSE": {
+        "gpt2-large": [
+            {
+                "score_dict 0": {
+                    "standard-accuracy": 0.5333333333333333,
+                    "pair-wise-accuracy": 0.06666666666666667
+                },
+                "preferred_score": "pair-wise-accuracy",
+                "number_of_shots": 0,
+                "low_score": 0.25,
+                "high_score": 1.0,
+                "subtask_description": "com2sense"
+            }
+        ],
+        "gpt2-xl": [
+            {
+                "score_dict 0": {
+                    "standard-accuracy": 0.5,
+                    "pair-wise-accuracy": 0.0
+                },
+                "preferred_score": "pair-wise-accuracy",
+                "number_of_shots": 0,
+                "low_score": 0.25,
+                "high_score": 1.0,
+                "subtask_description": "com2sense"
+            }
+        ],
+        "openai-gpt": [
+            {
+                "score_dict 0": {
+                    "standard-accuracy": 0.5,
+                    "pair-wise-accuracy": 0.0
+                },
+                "preferred_score": "pair-wise-accuracy",
+                "number_of_shots": 0,
+                "low_score": 0.25,
+                "high_score": 1.0,
+                "subtask_description": "com2sense"
+            }
+        ]
+    }
+}
