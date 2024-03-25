@@ -78,7 +78,7 @@ explainer = LimeTextExplainer(class_names=["Make a new plan", "Go home and see R
 #     # Return the probabilities of the last token
 #     return probabilities[:, -1, :]
 
-def predict_proba(texts, batch_size=64):
+def predict_proba(texts, batch_size=32):  # Reduced batch size
     probabilities = []
 
     # Process the data in batches
@@ -101,6 +101,9 @@ def predict_proba(texts, batch_size=64):
 
         # Add the probabilities of the current batch to the list
         probabilities.extend(batch_probabilities)
+
+        # Delete batch_probabilities to free up memory
+        del batch_probabilities
 
     # Convert the list of probabilities to a numpy array and reshape it to a 2D array
     probabilities = np.array(probabilities).reshape(len(texts), -1)
