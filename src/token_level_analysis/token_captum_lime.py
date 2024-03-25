@@ -3,24 +3,7 @@ import bigbench.models.huggingface_models as huggingface_models
 from captum.attr import Lime
 import torch
 from transformers import GPT2Tokenizer
-from IPython.core.display import HTML, display
-
-
-def show_text_attr(attrs):
-    def rgb(x): return '255,0,0' if x < 0 else '0,255,0'
-    def alpha(x): return abs(x) ** 0.5
-    token_marks = [
-        f'<mark style="background-color:rgba({rgb(attr)},{alpha(attr)})">{token}</mark>'
-        for token, attr in zip(tokenizer(input), attrs.tolist())
-    ]
-
-    display(HTML('<p>' + ' '.join(token_marks) + '</p>'))
-
-
-def load_data(path):
-    with open(path, 'r') as f:
-        return json.load(f)
-
+import matplotlib.pyplot as plt
 
 def predict(inputs):
     text = [tokenizer.decode(input) for input in inputs]
@@ -38,16 +21,29 @@ model = huggingface_models.BIGBenchHFModel('gpt2-large')
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2-large')
 input_ids = tokenizer.encode(input, return_tensors='pt')
 
+
 lime = Lime(predict)
 
-explanation = lime.attribute(input_ids.squeeze(), target=1, show_progress=True)
+explanation = lime.attribute(inputs=input_ids.squeeze(), target=0, show_progress=True)
+
+
+tokens = [tokenizer.decode(input_ids.squeeze()[i]) for i in range(len(input_ids.squeeze()))]
+importance_scores = explanation.detach().numpy()
+
+# # Create a bar chart
+plt.figure(figsize=(10, 5))
+plt.bar(tokens, importance_scores)
+plt.xlabel('Tokens')
+plt.ylabel('Importance')
+plt.title('Token Importance')
+plt.xticks(rotation=90)
+plt.show()
 
 # Print the explanation
-for i in range(len(input_ids.squeeze())):
-    print(
-        f"Token: {tokenizer.decode(input_ids.squeeze()[i])}, Importance: {explanation[i]}")
+# for i in range(len(input_ids.squeeze())):
+#     print(
+#         f"Token: {tokenizer.decode(input_ids.squeeze()[i])}, Importance: {explanation[i]}")
 
-# show_text_attr(explanation)
 
 """
 Kendall drank everyday until their friends mentioned it was becoming a problem. What will Kendall want to do next? -> Go to a meeting
