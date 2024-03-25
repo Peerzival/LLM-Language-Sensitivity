@@ -164,24 +164,28 @@
         ]
     },
     "CoQA": {
-        "gpt2-large": [],
-        "gpt2-xl": [],
-        "openai-gpt": []
-    },
-    "COM2SENSE": {
         "gpt2-large": [
             {
-                "score_dict 0": {
-                    "standard-accuracy": 0.5333333333333333,
-                    "pair-wise-accuracy": 0.06666666666666667
+                "score_dict -1": {
+                    "exact match": 1.6,
+                    "f1": 4.3
                 },
-                "preferred_score": "pair-wise-accuracy",
-                "number_of_shots": 0,
-                "low_score": 0.25,
-                "high_score": 1.0,
-                "subtask_description": "com2sense"
+                "number_of_shots": -1
             }
         ],
+        "gpt2-xl": [],
+        "openai-gpt": [
+            {
+                "score_dict -1": {
+                    "exact match": 0.0,
+                    "f1": 1.2
+                },
+                "number_of_shots": -1
+            }
+        ]
+    },
+    "COM2SENSE": {
+        "gpt2-large": [],
         "gpt2-xl": [
             {
                 "score_dict 0": {

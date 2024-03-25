@@ -164,9 +164,25 @@
         ]
     },
     "CoQA": {
-        "gpt2-large": [],
+        "gpt2-large": [
+            {
+                "score_dict -1": {
+                    "exact match": 0.9,
+                    "f1": 1.8
+                },
+                "number_of_shots": -1
+            }
+        ],
         "gpt2-xl": [],
-        "openai-gpt": []
+        "openai-gpt": [
+            {
+                "score_dict -1": {
+                    "exact match": 0.0,
+                    "f1": 0.3
+                },
+                "number_of_shots": -1
+            }
+        ]
     },
     "COM2SENSE": {
         "gpt2-large": [
