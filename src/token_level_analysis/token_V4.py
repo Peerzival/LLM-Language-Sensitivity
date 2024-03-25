@@ -41,12 +41,9 @@ for i in range(len(output_ids[0])):
 
 print(f'Probability of "{output_text}" is {prob}')
 
-# The rest of the code...
-
 # Create a LIME text explainer
 explainer = LimeTextExplainer(class_names=["Make a new plan", "Go home and see Riley", "Find somewhere to go"])
 
-# Define a prediction function for the explainer
 # def predict_proba(texts, batch_size=64):
 #     # Initialize an empty list to store the probabilities
 #     probabilities = []
