@@ -174,7 +174,15 @@
             }
         ],
         "gpt2-xl": [],
-        "openai-gpt": []
+        "openai-gpt": [
+            {
+                "score_dict -1": {
+                    "exact match": 0.0,
+                    "f1": 0.8
+                },
+                "number_of_shots": -1
+            }
+        ]
     },
     "COM2SENSE": {
         "gpt2-large": [
