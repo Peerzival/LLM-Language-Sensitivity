@@ -168,21 +168,13 @@
             {
                 "score_dict -1": {
                     "exact match": 0.9,
-                    "f1": 1.8
+                    "f1": 3.3
                 },
                 "number_of_shots": -1
             }
         ],
         "gpt2-xl": [],
-        "openai-gpt": [
-            {
-                "score_dict -1": {
-                    "exact match": 0.0,
-                    "f1": 0.3
-                },
-                "number_of_shots": -1
-            }
-        ]
+        "openai-gpt": []
     },
     "COM2SENSE": {
         "gpt2-large": [
