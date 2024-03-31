@@ -17,7 +17,7 @@
 
 from pathlib import Path
 import bigbench.api.task as task
-from .coqa_evaluator import CoQAEvaluator
+from ..services.coqa_evaluator_service import CoQAEvaluator
 import os
 import random
 
@@ -38,7 +38,7 @@ class CoQA(task.Task):
         self.batch_size = batch_size
         self.verbose = verbose
         self.max_response_length = max_response_length
-        coqa_test_file_path = os.path.join(BASEDIR, 'Dataset/CoQA/Full_set/coqa.test.json')
+        coqa_test_file_path = os.path.join(BASEDIR, 'datasets/CoQA/Original/coqa.json')
         self.evaluator = CoQAEvaluator(coqa_test_file_path)
         if max_examples < 0:
             self.num_examples = len(self.evaluator.gold_data.keys())

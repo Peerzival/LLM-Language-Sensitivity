@@ -2,16 +2,13 @@ transformers
 torch
 torchvision
 torchaudio
-# rouge-score
 nltk
-# bert-score
-# rouge
+bert-score
+rouge
 ipywidgets
-# SciencePlots
 spacy
 tensorflow
 captum
 numpy
 tf-keras
 torchtext
-lime

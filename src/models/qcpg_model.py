@@ -1,14 +1,4 @@
-import json
-import os
-import torch
-import json
-import uuid
-
 from transformers import pipeline
-from rouge_score import rouge_scorer
-from nltk.translate.bleu_score import sentence_bleu
-from nltk.translate.bleu_score import SmoothingFunction
-from bert_score import score
 
 
 class QualityControlPipeline:
@@ -30,7 +20,8 @@ class QualityControlPipeline:
             int(5 * round(val * 100 / 5)) for val in [semantic, lexical, syntactic]
         ]
         control = {
-            name: max(min(val, self.ranges[name[:3]][1]), self.ranges[name[:3]][0])
+            name: max(
+                min(val, self.ranges[name[:3]][1]), self.ranges[name[:3]][0])
             for name, val in zip(names, control)
         }
         control = [f"COND_{name.upper()}_{control[name]}" for name in names]
