@@ -1,4 +1,3 @@
-import json
 import bigbench.models.huggingface_models as huggingface_models
 from captum.attr import Lime
 import torch
@@ -9,7 +8,11 @@ def predict(inputs):
     text = [tokenizer.decode(input) for input in inputs]
     return torch.tensor([model.cond_log_prob(t, "Find somewhere to go") for t in text])
 
+# def predict(inputs):
+#     return torch.tensor([model.cond_log_prob(input, "Find somewhere to go")])
 
+
+# input = "Tracy didn't go home that evening and resisted Riley's attacks. What does Tracy need to do before this?"
 input = """Tracy didn't go home that evening and resisted Riley's attacks. What does Tracy need to do before this?
 Choice: Make a new plan
 Choice: Go home and see Riley
@@ -20,7 +23,6 @@ model = huggingface_models.BIGBenchHFModel('gpt2-large')
 # Tokenize the input
 tokenizer = GPT2Tokenizer.from_pretrained('gpt2-large')
 input_ids = tokenizer.encode(input, return_tensors='pt')
-
 
 lime = Lime(predict)
 
