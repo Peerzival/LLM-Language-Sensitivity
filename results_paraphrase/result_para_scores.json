@@ -166,17 +166,25 @@
     "CoQA": {
         "gpt2-large": [
             {
-                "score_dict -1": {
+                "score_dict 0": {
                     "exact match": 0.9,
                     "f1": 3.3
                 },
                 "number_of_shots": -1
             }
         ],
-        "gpt2-xl": [],
+        "gpt2-xl": [
+            {
+                "score_dict 0": {
+                    "exact match": 2.7,
+                    "f1": 5.9
+                },
+                "number_of_shots": -1
+            }
+        ],
         "openai-gpt": [
             {
-                "score_dict -1": {
+                "score_dict 0": {
                     "exact match": 0.0,
                     "f1": 0.8
                 },
