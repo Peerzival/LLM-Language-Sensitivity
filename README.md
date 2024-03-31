@@ -1,4 +1,4 @@
-# One Prompt to Rule them all 
+# The Search for the Holy Prompt 
 
 This is a dataset created for the seminar **Selected Topics in Data Science** for the **Master's programme** at the **Georg-August University in Göttingen**.
 
