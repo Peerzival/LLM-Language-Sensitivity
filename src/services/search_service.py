@@ -6,9 +6,17 @@ from rouge import Rouge
 from bert_score import score
 import torch
 from multiprocessing import Pool
-import multiprocessing
 
-def load_data(path):
+"""
+The script searches for the lowest ROUGE-L score, lowest BLEU score, and highest BERTscore in the CoQA dataset.
+
+Results:
+Lowest ROUGE-L score: ('3vnxk88kkcivuhrv1d113uw1iwwv9w', 0.11149683451988009)
+Lowest BLEU score: ('3vnxk88kkcivuhrv1d113uw1iwwv9w', 0.01931965027942906)
+Highest BERTscore: ('3dip6yhapcsee1mz1v6d3ud4xjre8b', tensor(0.9587))
+"""
+
+def _load_data(path):
     with open(path, 'r') as f:
         result_data = json.load(f)
     return result_data
@@ -41,14 +49,14 @@ BASEDIR = Path(__file__).parents[2]
 data_sets = ['SocialIQa', 'CoQA', 'COM2SENSE']
 
 para_data_file_path = os.path.join(
-    BASEDIR, 'Paraphasing\para_sets\coqa_score_set.json')
+    BASEDIR, 'outputs/para_sets/coqa_score_set.json')
 
 data_file_path = os.path.join(
-    BASEDIR, 'Dataset\CoQA\Full_set\coqa.test.json')
+    BASEDIR, 'datasets/CoQA/Original/coqa.json')
 
 if __name__ == "__main__":
-    data = load_data(data_file_path)
-    para_data = load_data(para_data_file_path)
+    data = _load_data(data_file_path)
+    para_data = _load_data(para_data_file_path)
     lowest_rouge_l_item = (1, 1)
     lowest_bleu_item = (1, 1)
     highest_bert_score_item = (1, 0)
@@ -69,9 +77,3 @@ if __name__ == "__main__":
     print(f'Lowest ROUGE-L score: {lowest_rouge_l_item}')
     print(f'Lowest BLEU score: {lowest_bleu_item}')
     print(f'Highest BERTscore: {highest_bert_score_item}')
-
-"""
-Lowest ROUGE-L score: ('3vnxk88kkcivuhrv1d113uw1iwwv9w', 0.11149683451988009)
-Lowest BLEU score: ('3vnxk88kkcivuhrv1d113uw1iwwv9w', 0.01931965027942906)
-Highest BERTscore: ('3dip6yhapcsee1mz1v6d3ud4xjre8b', tensor(0.9587))
-"""

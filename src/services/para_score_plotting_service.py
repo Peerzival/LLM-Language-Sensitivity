@@ -139,20 +139,3 @@ legend_elements = [Patch(color=c, lw=4, label=l)
 fig.legend(handles=legend_elements, loc='upper center', ncol=3, fontsize='x-small', edgecolor='lightgrey')
 
 plt.savefig(os.path.join(BASEDIR, 'src/final_scores.png'))
-
-"""
-SocialIQa
-ROUGE-L scores: [0.514072263516244, 0.43642699136098767, 0.44625214634787813, 0.33657064645534057, 0.45692469184296364]
-BLEU scores: {'veryLow': 0.17135089106364895, 'low': 0.09982848586223189, 'medium': 0.11386160992466997, 'high': 0.054695276891230056, 'veryHigh': 0.11928528857866033}
-BERT scores: [tensor(0.9280), tensor(0.9165), tensor(0.9176), tensor(0.9018), tensor(0.9193)]
-
-CoQA
-ROUGE-L scores: [0.5870273801363547, 0.4287821174154355, 0.3885665119470412, 0.27299950857458655, 0.39705325306311134]
-BLEU scores: {'veryLow': 0.22139331171019222, 'low': 0.11881885991816528, 'medium': 0.11133686662191032, 'high': 0.06811153059500391, 'veryHigh': 0.1089131789913937}
-BERT scores: [tensor(0.9611), tensor(0.9433), tensor(0.9320), tensor(0.9093), tensor(0.9380)]
-
-COM2SENSE
-ROUGE-L scores: [0.5684023066036842, 0.4833325686391094, 0.4493628653720468, 0.3693298906887459, 0.4767609355537734]
-BLEU scores: {'veryLow': 0.2152603970315278, 'low': 0.13313002344846364, 'medium': 0.13301166027912834, 'high': 0.07469943510424602, 'veryHigh': 0.1415307294941861}
-BERT scores: [tensor(0.9447), tensor(0.9331), tensor(0.9280), tensor(0.9127), tensor(0.9323)]
-"""
